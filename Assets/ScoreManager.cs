@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using NaughtyAttributes;
 using TMPro;
 using UnityEngine;
@@ -28,6 +29,8 @@ public class ScoreManager : MonoBehaviour
         }
         _score += value;
         _scoreText.text = _score.ToString();
+        _scoreText.transform.localScale = Vector3.one;
+        _scoreText.DOScale(1.5f, .3f).SetEase(Ease.InBounce).SetLoops(2, LoopType.Yoyo);
     }
     
     public void RemoveScore(int value)
@@ -38,6 +41,8 @@ public class ScoreManager : MonoBehaviour
         }
         _score -= value;
         _scoreText.text = _score.ToString();
+        _scoreText.transform.localScale = Vector3.one;
+        _scoreText.DOScale(.5f, .3f).SetEase(Ease.InBounce).SetLoops(2, LoopType.Yoyo);
     }
 
     [Button]
