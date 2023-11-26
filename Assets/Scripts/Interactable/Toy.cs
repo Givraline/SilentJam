@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Toy : MonoBehaviour, IInteractable
 {
-    public void Interact()
+    public void Interact(PlayerInteract playerInteract)
     {
-        Debug.Log("Interact");
+        playerInteract.PlayerHold.Hold(this);
     }
 }
