@@ -118,3 +118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b62eba77824924c87bd0c3ac03e51c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _wrappedToyMesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+  _wrappedToyWithGiftBowMesh: {fileID: 10208, guid: 0000000000000000e000000000000000,
+    type: 0}
+  _meshFilter: {fileID: 4091728145896705464}

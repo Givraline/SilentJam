@@ -29,6 +29,7 @@ public class GiftBowStation : MonoBehaviour, IInteractable
         {
             Debug.Log("Put giftbow on Toy");
             toy.HasGiftBow = true;
+            toy.MeshFilter.mesh = toy.WrappedToyWithGiftBowMesh;
         }
     }
 }
