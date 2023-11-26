@@ -19,7 +19,7 @@ public class GiftBowStation : MonoBehaviour, IInteractable
     {
         if(!toy.IsWrapped)
         {
-            Debug.Log("Canno't put giftbow because Toy is not wrapped");
+            Debug.Log("Cannot put giftbow because Toy is not wrapped");
         }
         else if (toy.HasGiftBow)
         {
