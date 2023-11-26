@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEngine.InputManagerEntry;
 
 public class PlayerHold : MonoBehaviour
 {
@@ -23,12 +24,13 @@ public class PlayerHold : MonoBehaviour
     {
         if( _toy != null)
         {
-            Debug.Log("Already Holding an Item");
+            Debug.Log("Already Holding a Toy");
         }
         else
         {
             toy.transform.position = _holdPoint.position;
             toy.transform.parent = _holdPoint;
+            toy.GetComponent<Collider>().enabled = false;
             _toy = toy;
         }
     }
@@ -38,6 +40,7 @@ public class PlayerHold : MonoBehaviour
         if(_toy != null)
         {
             _toy.transform.parent = transform.root;
+            _toy.GetComponent<Collider>().enabled = true;
             _toy = null;
         }
         else
