@@ -10,6 +10,11 @@ public class PlayerHold : MonoBehaviour
 
     [SerializeField] InputActionReference _drop;
 
+
+    #region Properties
+    public Toy Toy { get => _toy; set => _toy = value; }
+    #endregion
+
     private void Start()
     {
         _drop.action.started += Drop;
