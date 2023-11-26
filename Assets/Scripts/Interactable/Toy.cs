@@ -1,11 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Toy : MonoBehaviour, IInteractable
 {
-    public void Interact()
+    bool _isWrapped;
+    bool _hasGiftBow;
+
+    #region Properties
+    public bool IsWrapped { get => _isWrapped; set => _isWrapped = value; }
+    public bool HasGiftBow { get => _hasGiftBow; set => _hasGiftBow = value; }
+    #endregion
+
+    public void Interact(PlayerInteract playerInteract)
     {
-        Debug.Log("Interact");
+        playerInteract.PlayerHold.Hold(this);
     }
 }
