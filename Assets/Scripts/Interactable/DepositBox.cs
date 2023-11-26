@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DepositBox : MonoBehaviour, IInteractable
@@ -27,7 +25,7 @@ public class DepositBox : MonoBehaviour, IInteractable
         {
             playerHold.Toy = null;
             Destroy(toy.gameObject);
-            //Add score
+            ScoreManager.instance.AddScore(toy.ScoreValue);
             Debug.Log("Toy Deposited");
         }
     }

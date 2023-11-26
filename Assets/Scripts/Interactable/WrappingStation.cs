@@ -25,6 +25,7 @@ public class WrappingStation : MonoBehaviour, IInteractable
         else
         {
             toy.IsWrapped = true;
+            toy.MeshFilter.mesh = toy.WrappedToyMesh;
             Debug.Log("Wrapped Toy");
         }
     }
