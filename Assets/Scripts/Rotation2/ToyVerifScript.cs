@@ -33,6 +33,11 @@ public class ToyVerifScript : MonoBehaviour
         }
         if(check==2){
             Debug.Log("EH C'EST GAGNEEEE");
+        }else{
+            Debug.Log("Dommage, mauvais cadeau");
         }
+        check = 0;
+        ShuffleTasks();
+        GameObject.Find("---ScoreManager---").GetComponent<ToySpawner>().SummonToy();
     }
 }
