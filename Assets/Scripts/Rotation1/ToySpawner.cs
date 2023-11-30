@@ -10,7 +10,7 @@ public class ToySpawner : MonoBehaviour
 
     private void Start()
     {
-        StartSpawnToys();
+        // StartSpawnToys();
     }
 
     void StartSpawnToys()
@@ -32,5 +32,9 @@ public class ToySpawner : MonoBehaviour
     void StopSpawnToys()
     {
         StopCoroutine(_spawnToys);
+    }
+
+    public void SummonToy(){
+        Instantiate(_toyPrefab, transform.position, transform.rotation);
     }
 }
