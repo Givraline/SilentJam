@@ -96,7 +96,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7708523633190333894}
   - component: {fileID: 1340949692250390028}
-  - component: {fileID: 5722497286253010304}
+  - component: {fileID: 4934366408440410923}
   m_Layer: 0
   m_Name: HoldingPoint
   m_TagString: Untagged
@@ -140,7 +140,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.9020833, y: 3.5059946, z: 2.0140588}
   m_Center: {x: -0.037105024, y: -0.34471047, z: -0.15840304}
---- !u!114 &5722497286253010304
+--- !u!114 &4934366408440410923
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -152,9 +152,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3b1133b53052354d84ee7c89d08c302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Capsule: {fileID: 0}
+  WrappedGift: {fileID: 919132149155446097, guid: 8a316c6ad3e03ab438db80200b5d9035,
+    type: 3}
+  Pyramid: {fileID: 0}
   Sphere: {fileID: 0}
   Cube: {fileID: 0}
+  MaterialBlue: {fileID: 2100000, guid: 5cf3ac91871d08d40bd0f09823879d93, type: 2}
+  MaterialRed: {fileID: 2100000, guid: dff46b62aa14a7f4194c1a53ba438f7f, type: 2}
+  MaterialGreen: {fileID: 2100000, guid: cb6d67b4e6a4b454f837c1d000f23fa8, type: 2}
 --- !u!1 &4842783835384960280
 GameObject:
   m_ObjectHideFlags: 0
@@ -266,7 +271,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _move: {fileID: -1919248452516930521, guid: 2bf579ac94a83fa488675870d63fb5c0, type: 3}
-  _speed: 10
+  _speed: 12
   _rb: {fileID: 8791358544402223945}
 --- !u!114 &6889373904090121460
 MonoBehaviour:
@@ -283,7 +288,7 @@ MonoBehaviour:
   _interact: {fileID: 1219115769722586510, guid: 2bf579ac94a83fa488675870d63fb5c0,
     type: 3}
   _interactionOrigin: {fileID: 776991855061270868}
-  _interactionRadius: 0.53
+  _interactionRadius: 1.47
 --- !u!114 &4570414965202732656
 MonoBehaviour:
   m_ObjectHideFlags: 0
