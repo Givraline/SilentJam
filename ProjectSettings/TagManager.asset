@@ -3,7 +3,16 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Conveyor
+  - Toy
+  - GreenPaint
+  - RedPaint
+  - BluePaint
+  - Capsule
+  - Sphere
+  - Cube
+  - Verificator
   layers:
   - Default
   - TransparentFX
