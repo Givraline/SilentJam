@@ -18,17 +18,22 @@ public class ConveyorBelt : MonoBehaviour
     }
     
 
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
-        Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
-        rb.velocity = transform.forward * _speed * Time.fixedDeltaTime;
-        _rbs.Add(rb);
-        
+        if (other.gameObject.CompareTag("Toy"))
+        {
+            Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
+            rb.velocity = transform.forward * _speed * Time.fixedDeltaTime;
+            _rbs.Add(rb);
+        }        
     }
 
-    private void OnCollisionExit(Collision other)
+    private void OnTriggerExit(Collider other)
     {
-        Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
-        _rbs.Remove(rb);
+        if (other.gameObject.CompareTag("Toy"))
+        {
+            Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
+            _rbs.Remove(rb);
+        }
     }
 }
