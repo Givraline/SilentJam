@@ -39,16 +39,18 @@ public class TimerManager : MonoBehaviour
         if (_timer == 0)
         {
             MessageGenerator.Instance.ShowMessage("TIME UP !");
-            if(_sm.Score <= 100)
+            if(_sm.Score < 100)
             {
-                yield return new WaitForSeconds(2.0f);
+                yield return new WaitForSeconds(1.5f);
                 MessageGenerator.Instance.ShowMessage("YOU LOOSE...");
+                yield return new WaitForSeconds(1.0f);
                 SceneManager.LoadScene(0);
             }
             else
             {
-                yield return new WaitForSeconds(2.0f);
+                yield return new WaitForSeconds(1.5f);
                 MessageGenerator.Instance.ShowMessage("YOU WIN !");
+                yield return new WaitForSeconds(1.0f);
                 SceneManager.LoadScene(0);
             }
         }
