@@ -10,7 +10,7 @@ public class ToySpawner : MonoBehaviour
 
     private void Start()
     {
-        // StartSpawnToys();
+        StartSpawnToys();
     }
 
     void StartSpawnToys()

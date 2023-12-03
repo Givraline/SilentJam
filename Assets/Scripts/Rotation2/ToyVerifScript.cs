@@ -9,7 +9,7 @@ public class ToyVerifScript : MonoBehaviour
     [SerializeField] TextMeshProUGUI ColorTxt;
     string[] colorList = {"Green", "Blue", "Red"};
     int checkColor;
-    string[] formList = {"Cube", "Sphere", "Capsule"};
+    string[] formList = {"Cube", "Sphere", "Pyramid"};
     int checkForm;
 
     void Start(){
@@ -23,18 +23,24 @@ public class ToyVerifScript : MonoBehaviour
         FormTxt.SetText(formList[checkForm]);
     }
 
-    public void checkup(string color, string form){
+    public void checkup(string color, string form, bool isWrapped){
         int check = 0;
-        if(color==colorList[checkColor]){
-            check++;
-        }
-        if(form==formList[checkForm]){
-            check++;
+        if (isWrapped)
+        {
+            if(color==colorList[checkColor]){
+                check++;
+            }
+            if(form==formList[checkForm]){
+                check++;
+            }
         }
         if(check==2){
-            Debug.Log("EH C'EST GAGNEEEE");
-        }else{
-            Debug.Log("Dommage, mauvais cadeau");
+            MessageGenerator.Instance.ShowMessage("RIGHT GIFT!");
+            ScoreManager.instance.AddScore(20);
+        }
+        else{
+            MessageGenerator.Instance.ShowMessage("WRONG GIFT!");
+            ScoreManager.instance.RemoveScore(20);
         }
         check = 0;
         ShuffleTasks();

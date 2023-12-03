@@ -10,7 +10,7 @@ public class PlayerInteract : MonoBehaviour
     PlayerHold _playerHold;
 
 
-    #region Propeties
+    #region Properties
     public Transform InteractionOrigin { get => _interactionOrigin; }
     public PlayerHold PlayerHold { get => _playerHold; }
     #endregion

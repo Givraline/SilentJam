@@ -9,6 +9,8 @@ public class PickingUpScript : MonoBehaviour
     bool isCheckable = false;
     bool canColor = false;
     bool canForm = false;
+    bool canWrap = false;
+    bool isWrapped = false;
     bool cd = false;
     string whatColor;
     string whatForm;
@@ -16,17 +18,22 @@ public class PickingUpScript : MonoBehaviour
     ToyScriptValues toyScriptValues;
     GameObject ObjectList;
 
-    [SerializeField] GameObject Capsule;
-    Mesh CapsuleMesh;
+    [SerializeField] GameObject WrappedGift;
+    [SerializeField] GameObject Pyramid;
+    Mesh PyramidMesh;
     [SerializeField] GameObject Sphere;
     Mesh SphereMesh;
     [SerializeField] GameObject Cube;
     Mesh CubeMesh;
     GameObject verificator;
 
+    [SerializeField] Material MaterialBlue;
+    [SerializeField] Material MaterialRed;
+    [SerializeField] Material MaterialGreen;
+
 
     void Start(){
-        CapsuleMesh = Capsule.GetComponent<MeshFilter>().mesh;
+        PyramidMesh = Pyramid.GetComponent<MeshFilter>().mesh;
         SphereMesh = Sphere.GetComponent<MeshFilter>().mesh;
         CubeMesh = Cube.GetComponent<MeshFilter>().mesh;
         ObjectList = transform.parent.transform.parent.gameObject;
@@ -52,44 +59,58 @@ public class PickingUpScript : MonoBehaviour
                 heldObj.transform.parent = ObjectList.transform;
             }
 
-            if(canColor){
-                if(Input.GetKeyDown(KeyCode.E)&& !cd){
+            if(canColor && !isWrapped)
+            {
+                if(Input.GetKeyDown(KeyCode.E) && !cd){
                     StartCoroutine(Cooldown());
                     if(whatColor == "Green"){
-                        heldObj.GetComponent<MeshRenderer>().material.color = Color.green;
+                        heldObj.GetComponent<MeshRenderer>().material = MaterialGreen;
                         toyScriptValues.Color = "Green";
                     }else if(whatColor == "Red"){
-                        heldObj.GetComponent<MeshRenderer>().material.color = Color.red;
+                        heldObj.GetComponent<MeshRenderer>().material = MaterialRed;
                         toyScriptValues.Color = "Red";
                     }else if(whatColor == "Blue"){
-                        heldObj.GetComponent<MeshRenderer>().material.color = Color.blue;
+                        heldObj.GetComponent<MeshRenderer>().material = MaterialBlue;
                         toyScriptValues.Color = "Blue";
                     }
                 }
             }
-            if(canForm){
-                if(Input.GetKeyDown(KeyCode.E)&& !cd){
+            if(canForm && !isWrapped)
+            {
+                if(Input.GetKeyDown(KeyCode.E) && !cd){
                     StartCoroutine(Cooldown());
-                    if(whatForm == "Capsule"){
-                        heldObj.GetComponent<MeshFilter>().mesh = CapsuleMesh;
-                        toyScriptValues.Form = "Capsule";
+                    if(whatForm == "Pyramid"){
+                        heldObj.GetComponent<MeshFilter>().mesh = PyramidMesh;
+                        //heldObj.transform.localScale = new Vector3(50,50,50);
+                        toyScriptValues.Form = "Pyramid";
                     }else if(whatForm == "Cube"){
                         heldObj.GetComponent<MeshFilter>().mesh = CubeMesh;
+                        //heldObj.transform.localScale = Vector3.one;
                         toyScriptValues.Form = "Cube";
                     }else if(whatForm == "Sphere"){
                         heldObj.GetComponent<MeshFilter>().mesh = SphereMesh;
+                        //heldObj.transform.localScale = Vector3.one;
                         toyScriptValues.Form = "Sphere";
                     }
                 }
             }
-            if(isCheckable){
-                Debug.Log("tt");
-                if(Input.GetKeyDown(KeyCode.E)&& !cd){
-                    Debug.Log("ttt");
+            if (canWrap)
+            {
+                if (Input.GetKeyDown(KeyCode.E) && !cd)
+                {
                     StartCoroutine(Cooldown());
-                    verificator.GetComponent<ToyVerifScript>().checkup(toyScriptValues.Color, toyScriptValues.Form);
+                    Destroy(heldObj);
+                    heldObj = Instantiate(WrappedGift, transform);
+                    isWrapped = true;
+                }
+            }
+            if(isCheckable){
+                if(Input.GetKeyDown(KeyCode.E) && !cd){
+                    StartCoroutine(Cooldown());
+                    verificator.GetComponent<ToyVerifScript>().checkup(toyScriptValues.Color, toyScriptValues.Form, isWrapped);
                     Destroy(heldObj);
                     isHoldingObj = false;
+                    isWrapped = false;
                 }
             }
         }
@@ -97,6 +118,7 @@ public class PickingUpScript : MonoBehaviour
 
 
     void OnTriggerEnter(Collider col){
+        Debug.Log(col.tag + isHoldingObj);
         if(col.tag == "Toy" && !isHoldingObj){
             heldObj = col.gameObject;
             isPickable=true;
@@ -104,40 +126,66 @@ public class PickingUpScript : MonoBehaviour
             isPickable=false;
         }
 
-        if(isHoldingObj){
-            if(col.tag == "GreenPaint"){
-                whatColor="Green";
-                canColor=true;
-            }else if(col.tag == "RedPaint"){
-                whatColor="Red";
-                canColor=true;
-            }else if(col.tag == "BluePaint"){
-                whatColor="Blue";
-                canColor=true;
-            }else{
-                canColor=false;
+        if (isHoldingObj)
+        {
+            if (col.tag == "GreenPaint")
+            {
+                whatColor = "Green";
+                canColor = true;
+            }
+            else if (col.tag == "RedPaint")
+            {
+                whatColor = "Red";
+                canColor = true;
+            }
+            else if (col.tag == "BluePaint")
+            {
+                whatColor = "Blue";
+                canColor = true;
+            }
+            else
+            {
+                canColor = false;
             }
 
-            if(col.tag == "Capsule"){
-                whatForm="Capsule";
-                canForm=true;
-            }else if(col.tag == "Cube"){
-                whatForm="Cube";
-                canForm=true;
-            }else if(col.tag == "Sphere"){
-                whatForm="Sphere";
-                canForm=true;
-            }else{
-                canForm=false;
+            if (col.tag == "Capsule")
+            {
+                whatForm = "Pyramid";
+                canForm = true;
+            }
+            else if (col.tag == "Cube")
+            {
+                whatForm = "Cube";
+                canForm = true;
+            }
+            else if (col.tag == "Sphere")
+            {
+                whatForm = "Sphere";
+                canForm = true;
+            }
+            else
+            {
+                canForm = false;
+            }
+
+            if (col.tag == "Wrap")
+            {
+                canWrap = true;
+            }
+
+            if (col.tag == "Verificator")
+            {
+                isCheckable = true;
             }
         }
-        
-        if(col.tag == "Verificator" && isHoldingObj){
-            isCheckable=true;
-        }
     }
+        
     void OnTriggerExit(Collider col){
-        if(col.tag == "Toy" && !isHoldingObj){
+        if (col.tag == "Wrap")
+        {
+            canWrap = false;
+        }
+        if (col.tag == "Toy" && !isHoldingObj){
             isPickable=false;
         }
         if(isHoldingObj){
@@ -148,7 +196,7 @@ public class PickingUpScript : MonoBehaviour
                 canForm=false;
             }
         }
-        if(col.tag == "Verificator" && isHoldingObj){
+        if(col.tag == "Verificator"){
             isCheckable=false;
         }
     }
